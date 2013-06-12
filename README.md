@@ -32,7 +32,7 @@ mm2s5 is [FreeMind](http://freemind.sourceforge.net/wiki/index.php/Main_Page) to
 
   open s5/test.html in web browser.
 
-  (Linux) s5/test.html
+  (Linux)
   $ xdg-open s5/test.html
   or
   $ gnome-open s5/test.html
