@@ -1,3 +1,5 @@
+![mm2s5](mm2s5.png)
+
 ## mm2s5
 
 mm2s5 is [FreeMind](http://freemind.sourceforge.net/wiki/index.php/Main_Page) to [S5 slide show](http://meyerweb.com/eric/tools/s5/) converter.
