@@ -8,7 +8,7 @@
 <node CREATED="1371034586527" ID="ID_351117337" MODIFIED="1371252999226" TEXT="depth level two is slide page">
 <icon BUILTIN="full-2"/>
 </node>
-<node CREATED="1371034605311" ID="ID_1720500752" MODIFIED="1371253001890" TEXT="depth level three is list in lide page">
+<node CREATED="1371034605311" ID="ID_1720500752" MODIFIED="1371253001890" TEXT="depth level three is list in slide page">
 <icon BUILTIN="full-3"/>
 </node>
 </node>
