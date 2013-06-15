@@ -9,6 +9,9 @@
 # 
 use strict;
 use XML::Simple;
+use File::Copy 'copy';
+use File::Basename;
+use Data::Dumper;
 
 &printUsageAndExit() if (@ARGV != 1);
 &printS5(%{XML::Simple->new()->XMLin($ARGV[0])});
@@ -73,7 +76,8 @@ sub printItems(%){
 sub printItem(%){
   my %mm = @_;
 
-  print &item($mm{TEXT}) if &hasText(%mm);
+  print &item(%mm) if &hasText(%mm);
+  print &richcontent(%mm) if &hasRichContent(%mm);
   &printItems(%mm) if (&hasChildren(%mm));
 }
 
@@ -85,6 +89,22 @@ sub hasChildren(%){
 sub hasText(%){
   my %mm = @_;
   return defined($mm{TEXT});
+}
+
+sub hasIcon(%){
+  my %mm = @_;
+  return defined($mm{icon});
+}
+
+sub hasRichContent(%){
+  my %mm = @_;
+  return defined($mm{richcontent}{html}{body}{img}{src});
+}
+
+sub imageCopy($){
+  my $file = shift;
+
+  copy $file, "s5/images/" . basename($file);
 }
 
 sub startPresentation(){
@@ -117,9 +137,22 @@ sub heading($){
 }
 
 sub item($){
-  my $str = shift;
-  return '  <li>' . $str . '</li>' . "\n";
+  my %mm = @_;
+
+  if(&hasIcon(%mm)){
+    return '  <li style="background:url(images/icons/' . $mm{icon}{BUILTIN} . '.png); background-repeat: no-repeat; list-style: none; padding: 0 0 0 17px;">' . $mm{TEXT} . '</li>' . "\n";
+  } else {
+    return '  <li>' . $mm{TEXT} . '</li>' . "\n";
+  }
 }
+
+sub richcontent($){
+  my %mm = @_;
+
+  &imageCopy($mm{richcontent}{html}{body}{img}{src});
+  return "<img src='images/" . basename($mm{richcontent}{html}{body}{img}{src}) . "' />";
+}
+
 
 sub printS5Layout($){
   my $title = shift;
